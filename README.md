@@ -14,3 +14,14 @@ environment. For general instructions about running AI agents on LUMI, please se
 - An `opencode.json` config file for making the `AGENTS.md` file and the
   [LUMI AIF MCP server](https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/#mcp-server)
   discoverable to the agent.
+
+## Usage
+
+```bash
+# Load environment module
+module use /appl/local/laifs/agents/lmod
+module load opencode
+
+# Start agent
+opencode
+```
