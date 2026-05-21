@@ -1,0 +1,31 @@
+Bootstrap: docker
+From: ubuntu:24.04
+
+%files
+    AGENTS.md /opt/opencode/
+    opencode.json /opt/opencode/
+
+%post
+    # Upgrade system packages.
+    export DEBIAN_FRONTEND=noninteractive
+    apt-get update && apt-get upgrade -y
+
+    # Install Node.js and OpenCode.
+    apt-get install npm -y
+    npm install -g opencode-ai
+
+    # Create SlurmUser as defined in LUMI slurm.conf.
+    # Running Slurm commands requires this user to exist inside the container.
+    useradd slurm
+
+    # Give read permissions to instructions and config
+    chmod +r /opt/opencode/*
+
+%environment
+    export OPENCODE_CONFIG=/opt/opencode/opencode.json
+
+%test
+    opencode --version
+
+%runscript
+    opencode

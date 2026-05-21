@@ -1,0 +1,11 @@
+{
+    "$schema": "https://opencode.ai/config.json",
+    "instructions": ["/opt/opencode/AGENTS.md"],
+    "mcp": {
+        "lumi-aif": {
+            "type": "remote",
+            "url": "https://lumi-aif-agents.2.rahtiapp.fi/mcp",
+            "enabled": true
+        }
+    }
+}
