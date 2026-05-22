@@ -1,6 +1,11 @@
 local bindPaths = {
-    -- Directories mounted by, e.g., lumi-aif-singularity-bindings
-    "/appl", "/flash", "/pfs", "/projappl", "/project", "/scratch", 
+    -- Storage areas like `/scratch` are deliberately left unmounted
+    -- to provide more control over file access.
+    -- The current working directory is mounted by default,
+    -- which should be enough for a coding agent.
+    --
+    -- Software installed by LUST and local organizations
+    "/appl",
     -- Slurm configuration
     "/etc/slurm",
     -- Frequently used Slurm commands
