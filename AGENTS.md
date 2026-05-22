@@ -1,48 +1,52 @@
-# AGENTS.md
+# LUMI Supercomputer Runtime Context
 
-Runtime context for a coding agent running on the **LUMI supercomputer** (EuroHPC, hosted at CSC, Finland).
+You are running on LUMI, an HPE Cray EX supercomputer consisting of several hardware partitions
+targeting different use cases. The primary compute power in LUMI is found in the LUMI-G hardware
+partition, which features GPU-accelerated nodes using AMD Instinct MI250X GPUs.
 
-## System
+## Containerized environment
 
-- **Architecture**: HPE Cray EX. AMD EPYC CPUs (`LUMI-C`), AMD MI250X GPUs (`LUMI-G`), large-memory nodes (`LUMI-D`), object storage (`LUMI-O`).
-- **OS**: SUSE Linux (HPE Cray OS). You are on a **login node** by default — do not run heavy workloads here. Submit to compute nodes via Slurm.
-- **GPU runtime**: ROCm (not CUDA). PyTorch/TensorFlow builds must be ROCm-compatible.
-- **Network**: HPE Slingshot 11. Use the host MPI stack (`cray-mpich`) for performance.
+You are running inside a Singularity container. While it is possible for the user to mount
+additional host directories, expect to only have access to the directories that Singularity mounts
+by default, like the current working directory and the user home directory. That being said, the
+following are also mounted from the host system and therefore accessible to you:
 
-## Filesystems
+- The `/appl` directory containing software that is installed by the LUMI User Support Team and
+  local organizations in the LUMI consortium
+- Files required for using the Slurm workload manager from inside the container
 
-| Path | Purpose | Quota | Notes |
-|---|---|---|---|
-| `/users/<user>` | Home, configs | 20 GB / 100k files | No backups. |
-| `/project/<project>` | Shared project files | 50 GB / 100k files | Lustre (LUMI-P). |
-| `/scratch/<project>` | Job I/O, checkpoints | 50 TB / 2M files | Default work area. May be auto-cleaned. |
-| `/flash/<project>` | High-performance scratch | 2 TB / 1M files | NVMe (LUMI-F). 3× billing. |
-| `/tmp` (login) | Local SSD | — | Per-node, ephemeral. Good for compilation. |
-| `/tmp` (compute) | In-memory | — | Counts against job memory. |
+## Running processes
 
-**No backups anywhere.** Lustre dislikes many small files — avoid raw `pip`/`conda` installs on `/project` or `/scratch`; use containers instead. Check usage with `lumi-workspaces`.
+The nodes on LUMI are classified into login nodes and compute nodes. Expect to be on a login node
+by default. Login nodes are shared by all LUMI users and are only intended for simple management
+tasks, e.g.
 
-## Software
+- compiling software (but consider allocating a compute node for large build
+  jobs)
+- submitting and managing Slurm jobs
+- moving data
+- light pre- and postprocessing (a few cores / a few GB of memory)
 
-- **Modules**: Lmod. Use `module spider <name>` to search, `module load <name>` to load. The default stack is `CrayEnv`; richer stacks load via e.g. `module load LUMI/24.03`.
-- **User installs**: prefer **EasyBuild** in the LUMI stack (`module load EasyBuild-user`, then `eb <recipe>.eb -r`). Install to `/project/<project>`, not `/users`.
-- **Containers**: **Singularity / SingularityCE**. The LUMI AI Factory provides ready-made ROCm + PyTorch + MPICH images (`lumi-multitorch-*`). Bind `/scratch/<project>` and `/project/<project>` explicitly — they are symlinks and `-B /scratch` alone won't work.
+All compute-heavy tasks must be submitted through the Slurm workload manager so that they are run
+on compute nodes.
 
-## Running jobs
+## Data storage
 
-Use **Slurm**. Always pass `--account=<project>` and `--partition=<name>`.
+When working on LUMI, the working directory is typically under either the user home directory or a
+project-specific directory, which is in turn located under one of the top-level directories of
+`/project`, `/scratch` and `/flash`.
 
-Common partitions: `standard` / `standard-g` (full nodes, 2-day max), `small` / `small-g` (sub-node, 3-day max), `debug` / `dev-g` (30 min, for testing), `largemem` (LUMI-D).
+All of these directories, including the user home directory, are on Lustre file systems. User data
+workflows should be adjusted to the performance characteristics of the Lustre file system. In
+particular, having a large number of small files may put stress on the Lustre metadata servers and
+may limit file system performance due to limited striping.
 
-Quick interactive test: `srun --account=<project> --partition=dev-g --time=00:10:00 --gpus=1 --pty bash`.
+Users can check the memory and file usage quotas of their projects with the `lumi-workspaces` command.
 
-## Getting more information
+## LUMI AI Factory MCP server
 
-A documentation MCP server is available: **`LUMI AIF Server:retrieve_docs`** (params: `query`, optional `k`). Use it before guessing at module names, EasyBuild recipes, partition limits, Slurm flags, or container workflows — your training data is likely outdated. Searches the LUMI User Guide and LUMI AI Guide.
+The LUMI AI Factory provides a public Model Context Protocol (MCP) server, which allows agents to
+search a regularly-updated knowledge base of LUMI documentation. You have access to this MCP server,
+use it to answer questions about LUMI with more accuracy and write code that takes into account
+LUMI's particular system architecture and software environment.
 
-## Conventions
-
-- Don't run builds, training, or data processing on login nodes — submit a job or use `srun` interactively.
-- Don't `pip install` into home/project without a container; it will create thousands of small files and degrade the filesystem.
-- Always specify `--account` — jobs without it will be rejected.
-- Prefer `/scratch` for job working directories; copy results out before the retention policy collects them.
