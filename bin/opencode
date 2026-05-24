@@ -1,3 +1,3 @@
 #!/bin/bash
 
-singularity run -B $PWD /appl/local/laifs/agents/opencode.sif $@
+singularity run -B $PWD /appl/local/laifs/agents/sif/opencode.sif $@
