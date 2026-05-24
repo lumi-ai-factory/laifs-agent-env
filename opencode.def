@@ -15,7 +15,7 @@ From: ubuntu:24.04
 
     # Create SlurmUser as defined in LUMI slurm.conf.
     # Running Slurm commands requires this user to exist inside the container.
-    useradd slurm
+    useradd --system slurm
 
     # Give read permissions to instructions and config
     chmod +r /opt/opencode/*
