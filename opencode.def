@@ -2,8 +2,7 @@ Bootstrap: docker
 From: ubuntu:24.04
 
 %files
-    AGENTS.md /opt/opencode/
-    opencode.json /opt/opencode/
+    opencode/ /opt/
 
 %post
     # Upgrade system packages.
