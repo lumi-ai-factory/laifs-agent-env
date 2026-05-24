@@ -27,4 +27,4 @@ From: ubuntu:24.04
     opencode --version
 
 %runscript
-    opencode
+    opencode $@
