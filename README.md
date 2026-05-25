@@ -1,4 +1,4 @@
-# LUMI AI Factory Agent Sandbox
+# LUMI AI Factory Agent Environment
 
 This repository contains files for running the [OpenCode coding agent](https://opencode.ai/) on
 LUMI in a way that aims to minimize security risks and maintain awareness of the computing
