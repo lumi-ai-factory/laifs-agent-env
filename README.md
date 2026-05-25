@@ -19,8 +19,7 @@ environment. For general instructions about running AI agents on LUMI, please se
 
 ```bash
 # Load environment module
-module use /appl/local/laifs/agents/lmod
-module load opencode
+module load Local-LAIF opencode
 
 # Start agent
 opencode
