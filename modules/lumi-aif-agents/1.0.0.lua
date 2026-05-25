@@ -1,22 +1,5 @@
 -- LUMI AI Factory Agent Environment module
 
-help([[
-This is an experimental module for running a containerized OpenCode coding
-agent on LUMI. The default endpoint is OpenCode Zen, which is hosted by the
-OpenCode team. OpenCode is not in any way affiliated with LUMI or LUMI AI
-Factory.
-
-The current working directory is mounted by default, including its
-subdirectories. However, e.g., `/scratch` and `/project` are not explicitly
-mounted, so if your current working directory is not under one of them, you
-need to mount them yourself:
-
-```
-export SINGULARITY_BIND=$SINGULARITY_BIND,/path/to/project/dir
-opencode /path/to/project/dir
-```
-]])
-
 local bindPaths = {
     -- Storage areas like `/scratch` are deliberately left unmounted
     -- to provide more control over file access.
@@ -32,3 +15,23 @@ setenv("SINGULARITY_BIND", table.concat(bindPaths, ","))
 
 -- Add `opencode` command to `PATH`
 prepend_path("PATH", "/appl/local/laifs/agents/bin")
+
+if mode() == "load" then
+    LmodMessage(
+        "Loaded LUMI AI Factory Agent Environment module. Please\n" ..
+        "ensure you understand the following points before using the\n" ..
+        "agent environment:\n" ..
+        "\n" ..
+        "1. The default endpoint is provided by OpenCode. If you use it,\n" ..
+        "   any data you enter will be sent to an external party.\n" ..
+        "2. Your current working directory and any subdirectories are\n" ..
+        "   accessible to the agent. However, it must prompt for your\n" ..
+        "   permission to use any tools.\n" ..
+        "3. The agent environment is experimental and may evolve rapidly.\n" ..
+        "   Check often for any changes to agent capabilities and\n" ..
+        "   permissions.\n" ..
+        "\n" ..
+        "For more information, visit:\n" ..
+        "https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/"
+    )
+end
