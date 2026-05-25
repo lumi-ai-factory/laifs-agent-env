@@ -19,7 +19,7 @@ environment. For general instructions about running AI agents on LUMI, please se
 
 ```bash
 # Load environment module
-module load Local-LAIF opencode
+module load Local-LAIF lumi-aif-agents
 
 # Start agent
 opencode
