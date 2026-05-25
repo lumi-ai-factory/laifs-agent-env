@@ -18,9 +18,11 @@ prepend_path("PATH", "/appl/local/laifs/agents/bin")
 
 if mode() == "load" then
     LmodMessage(
-        "Loaded LUMI AI Factory Agent Environment module. Please\n" ..
-        "ensure you understand the following points before using the\n" ..
-        "agent environment:\n" ..
+        "\n" ..
+        "CAUTION: Loaded LUMI AI Factory agent environment module.\n" ..
+        "\n" ..
+        "Please ensure you understand the following points before using\n" ..
+        "the agent environment:\n" ..
         "\n" ..
         "1. The default endpoint is provided by OpenCode. If you use it,\n" ..
         "   any data you enter will be sent to an external party.\n" ..
@@ -32,6 +34,6 @@ if mode() == "load" then
         "   permissions.\n" ..
         "\n" ..
         "For more information, visit:\n" ..
-        "https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/"
+        "https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/\n"
     )
 end
