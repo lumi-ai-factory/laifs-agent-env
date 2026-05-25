@@ -14,10 +14,6 @@ From: ubuntu:24.04
     apt-get install npm -y
     npm install -g opencode-ai
 
-    # Create SlurmUser as defined in LUMI slurm.conf.
-    # Running Slurm commands requires this user to exist inside the container.
-    useradd --system slurm
-
     # Give read permissions to instructions and config
     chmod +r /opt/opencode/*
 
