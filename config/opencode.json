@@ -8,5 +8,8 @@
             "enabled": true
         }
     },
-    "permission": "ask"
+    "permission": {
+        "*": "ask",
+        "lumi-aif_*": "allow"
+    }
 }
