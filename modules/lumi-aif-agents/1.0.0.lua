@@ -12,8 +12,9 @@ This module provides the following commands:
 * opencode
 
 More information:
-* https://github.com/lumi-ai-factory/laifs-agent-env/
-* https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/
+* https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure
+* https://github.com/lumi-ai-factory/laifs-agent-env
+* https://opencode.ai/docs
 ]])
 
 --
