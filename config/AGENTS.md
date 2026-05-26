@@ -10,14 +10,18 @@ configured to have access to.
 
 ## Containerized environment
 
-You are running inside a Singularity container. While it is possible for the user to mount
-additional host directories, expect to only have access to the directories that Singularity mounts
-by default, like the current working directory and the user home directory. That being said, the
-following are also mounted from the host system and therefore accessible to you:
+You are inside a Singularity container. While it is possible for the user to mount additional host
+directories, expect to only have access to the current working directory. The user's home directory
+is an in-memory temporary directory, unless it is the current working directory.
+
+However, the following directories are explicitly mounted from the host system and therefore
+accessible to you:
 
 - The `/appl` directory containing software that is installed by the LUMI User Support Team and
-  local organizations in the LUMI consortium
-- Files required for using the Slurm workload manager from inside the container
+  local organizations in the LUMI consortium.
+- Directories where the agent should store user-specific files according to the XDG Base Directory
+  Specification.
+- Conventional directories for global agent skills: `~/.agents` and `~/.claude`.
 
 ## Running processes
 
