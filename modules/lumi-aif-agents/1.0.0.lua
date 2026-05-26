@@ -1,4 +1,24 @@
--- LUMI AI Factory Agent Environment module
+-- LUMI AI Factory agent environment module
+--
+-- This module enables use of the LUMI AI Factory's containerized environment
+-- for running AI coding agents on LUMI in a more secure manner.
+--
+
+help([[
+The LUMI AI Factory agent environment is a containerized environment
+for running AI coding agents on LUMI in a more secure manner.
+
+This module provides the following commands:
+* opencode
+
+More information:
+* https://github.com/lumi-ai-factory/laifs-agent-env/
+* https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/
+]])
+
+--
+-- Set Singularity bind paths
+--
 
 local bindPaths = {
     -- Storage areas like `/scratch` are deliberately left unmounted
@@ -19,18 +39,25 @@ local bindPaths = {
     string.format("%s/.agents", os.getenv("HOME")),
     string.format("%s/.claude", os.getenv("HOME")),
 }
+
 setenv("SINGULARITY_BIND", table.concat(bindPaths, ","))
 
--- Add `opencode` command to `PATH`
+--
+-- Add executables to `PATH`
+--
+
 prepend_path("PATH", "/appl/local/laifs/agents/bin")
+
+--
+-- Print load message
+--
 
 if mode() == "load" then
     LmodMessage(
         "\n" ..
+        "=========================================================\n" ..
         "CAUTION: Loaded LUMI AI Factory agent environment module.\n" ..
-        "\n" ..
-        "Please ensure you understand the following points before using\n" ..
-        "the agent environment:\n" ..
+        "=========================================================\n" ..
         "\n" ..
         "* Data privacy: The default OpenCode model is hosted by the\n" ..
         "  company maintaining OpenCode. If you use this model, any data\n" ..
@@ -39,11 +66,10 @@ if mode() == "load" then
         "  subdirectories are accessible inside the environment. However,\n" ..
         "  the agent must prompt you for permission to read or write.\n" ..
         "* Experimental status: The agent environment is experimental and\n" ..
-        "  may evolve rapidly. Check the repository linked below for any\n" ..
-        "  changes to agent capabilities and permissions before use.\n" ..
+        "  may evolve rapidly. Check the `lumi-ai-factory/laifs-agent-env`\n" ..
+        "  GitHub repository for any changes to agent capabilities and\n" ..
+        "  permissions before use.\n" ..
         "\n" ..
-        "More information:\n" ..
-        "* https://github.com/lumi-ai-factory/laifs-agent-env\n" ..
-        "* https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/\n"
+        "Run `module help " .. myModuleName() .. "` for more information.\n"
     )
 end
