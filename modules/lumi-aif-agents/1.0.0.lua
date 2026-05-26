@@ -10,6 +10,14 @@ local bindPaths = {
     --
     -- Software installed by LUST and local organizations
     "/appl",
+    -- OpenCode data directories
+    string.format("%s/.cache/opencode", os.getenv("HOME")),
+    string.format("%s/.config/opencode", os.getenv("HOME")),
+    string.format("%s/.local/share/opencode", os.getenv("HOME")),
+    string.format("%s/.local/state/opencode", os.getenv("HOME")),
+    -- Additional agent skill directories
+    string.format("%s/.agents", os.getenv("HOME")),
+    string.format("%s/.claude", os.getenv("HOME")),
 }
 setenv("SINGULARITY_BIND", table.concat(bindPaths, ","))
 
