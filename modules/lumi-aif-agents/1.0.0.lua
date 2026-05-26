@@ -32,16 +32,18 @@ if mode() == "load" then
         "Please ensure you understand the following points before using\n" ..
         "the agent environment:\n" ..
         "\n" ..
-        "1. The default endpoint is provided by OpenCode. If you use it,\n" ..
-        "   any data you enter will be sent to an external party.\n" ..
-        "2. Your current working directory and any subdirectories are\n" ..
-        "   accessible to the agent. However, it must prompt for your\n" ..
-        "   permission to use any tools.\n" ..
-        "3. The agent environment is experimental and may evolve rapidly.\n" ..
-        "   Check often for any changes to agent capabilities and\n" ..
-        "   permissions.\n" ..
+        "* Data privacy: The default OpenCode model is hosted by the\n" ..
+        "  company maintaining OpenCode. If you use this model, any data\n" ..
+        "  you enter will be sent to the company.\n" ..
+        "* Data security: Your current working directory and any\n" ..
+        "  subdirectories are accessible inside the environment. However,\n" ..
+        "  the agent must prompt you for permission to read or write.\n" ..
+        "* Experimental status: The agent environment is experimental and\n" ..
+        "  may evolve rapidly. Check the repository linked below for any\n" ..
+        "  changes to agent capabilities and permissions before use.\n" ..
         "\n" ..
-        "For more information, visit:\n" ..
-        "https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/\n"
+        "More information:\n" ..
+        "* https://github.com/lumi-ai-factory/laifs-agent-env\n" ..
+        "* https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/\n"
     )
 end
