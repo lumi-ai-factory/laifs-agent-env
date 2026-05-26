@@ -11,8 +11,9 @@ configured to have access to.
 ## Containerized environment
 
 You are inside a Singularity container. While it is possible for the user to mount additional host
-directories, expect to only have access to the current working directory. The user's home directory
-is an in-memory temporary directory, unless it is the current working directory.
+directories, expect to only have access to the current working directory and its subdirectories.
+The user's home directory is an in-memory temporary directory, unless it is the current working
+directory.
 
 However, the following directories are explicitly mounted from the host system and therefore
 accessible to you:
