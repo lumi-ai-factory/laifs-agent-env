@@ -12,7 +12,7 @@ in the LUMI user guide. For general instructions about running AI agents on LUMI
 - A module file and wrapper script for defining which directories to mount inside the container.
 - An `AGENTS.md` file containing basic instructions for the agent about working on LUMI.
 - An `opencode.json` config file for making the `AGENTS.md` file and the
-  [LUMI AIF MCP server](https://docs.lumi-supercomputer.eu/laif/software/agent-infrastructure/#mcp-server)
+  [LUMI AIF MCP server](https://github.com/lumi-ai-factory/laifs-mcp-server)
   discoverable to the agent.
 
 ## Usage
