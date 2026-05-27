@@ -4,8 +4,6 @@
 -- for running AI coding agents on LUMI in a more secure manner.
 --
 
-require "lfs"
-
 help([[
 The LUMI AI Factory agent environment is a containerized environment
 for running AI coding agents on LUMI in a more secure manner.
@@ -20,37 +18,10 @@ More information:
 ]])
 
 --
--- Set Singularity bind paths
+-- Set module-level Singularity bind paths
 --
 
-local bindTable = {
-    -- Software installed by LUST and local organizations
-    "/appl",
-    -- OpenCode data directories
-    "~/.cache/opencode",
-    "~/.config/opencode",
-    "~/.local/share/opencode",
-    "~/.local/state/opencode",
-    -- Additional agent skill directories
-    "~/.agents",
-    "~/.claude",
-}
-
-local bindString = ""
-
-for i, v in ipairs(bindTable) do
-    local fp = string.gsub(v, "~", os.getenv("HOME"))
-    local attr = lfs.attributes(fp)
-
-    if attr and attr.mode == "directory" then
-        if #bindString > 0 then
-            bindString = bindString .. ","
-        end
-        bindString = bindString .. fp
-    end
-end
-
-setenv("SINGULARITY_BIND", bindString)
+setenv("SINGULARITY_BIND", "/appl")
 
 --
 -- Add executables to `PATH`

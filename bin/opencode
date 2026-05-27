@@ -1,3 +1,36 @@
 #!/bin/bash
+#
+# opencode
+#
+# Wrapper script for running OpenCode in a container.
+# Part of the `lumi-aif-agents` module.
+#
 
-singularity run --contain --bind $PWD --cwd $PWD /appl/local/laifs/agents/sif/opencode.sif $@
+CONTAINER=/appl/local/laifs/agents/sif/opencode.sif
+
+BIND_STRING="$PWD"  # Bind current working directory by default
+
+APP_DIRS=(
+    "$HOME/.cache/opencode"
+    "$HOME/.config/opencode"
+    "$HOME/.local/share/opencode"
+    "$HOME/.local/state/opencode"
+)
+
+EXTRA_DIRS=(
+    "$HOME/.agents"
+    "$HOME/.claude"
+)
+
+for path in $APP_DIRS; do
+    mkdir -p $path
+    BIND_STRING=${BIND_STRING},${path}
+done
+
+for path in $EXTRA_DIRS; do
+    if [[ -d $path ]]; then
+        BIND_STRING=${BIND_STRING},${path}
+    fi
+done
+
+singularity run -c -B $BIND_STRING --cwd $PWD $CONTAINER $@
