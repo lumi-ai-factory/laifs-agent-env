@@ -22,12 +22,12 @@ EXTRA_DIRS=(
     "$HOME/.claude"
 )
 
-for path in $APP_DIRS; do
+for path in ${APP_DIRS[@]}; do
     mkdir -p $path
     BIND_STRING=${BIND_STRING},${path}
 done
 
-for path in $EXTRA_DIRS; do
+for path in ${EXTRA_DIRS[@]}; do
     if [[ -d $path ]]; then
         BIND_STRING=${BIND_STRING},${path}
     fi
