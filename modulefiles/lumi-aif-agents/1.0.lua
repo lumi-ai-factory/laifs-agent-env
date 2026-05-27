@@ -44,8 +44,9 @@ if mode() == "load" then
         "  company maintaining OpenCode. If you use this model, any data\n" ..
         "  you enter will be sent to the company.\n" ..
         "* Data security: Your current working directory and any\n" ..
-        "  subdirectories are accessible inside the environment. However,\n" ..
-        "  the agent must prompt you for permission to read or write.\n" ..
+        "  subdirectories are accessible inside the environment.\n" ..
+        "* Tool use: The agent must prompt you for permission in order to\n" ..
+        "  use tools other than the LUMI AIF MCP server.\n" ..
         "* Experimental status: The agent environment is experimental and\n" ..
         "  may evolve rapidly. Check the `lumi-ai-factory/laifs-agent-env`\n" ..
         "  GitHub repository for any changes to agent capabilities and\n" ..
