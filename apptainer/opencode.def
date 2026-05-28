@@ -1,6 +1,9 @@
 Bootstrap: docker
 From: ubuntu:24.04
 
+%labels
+    Author mitjasai@csc.fi
+
 %arguments
     OPENCODE_CONFIG_DIR=/opt/opencode/config
     OPENCODE_INSTALL_DIR=/opt/opencode/bin
