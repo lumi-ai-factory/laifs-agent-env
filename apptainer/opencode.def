@@ -31,7 +31,7 @@ From: ubuntu:24.04
     export PATH={{ OPENCODE_INSTALL_DIR }}:$PATH
 
 %test
-    opencode --version
+    HOME=$(mktemp -d) opencode debug info
 
 %runscript
     opencode $@
