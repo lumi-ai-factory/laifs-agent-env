@@ -3,22 +3,32 @@ From: ubuntu:24.04
 
 %arguments
     OPENCODE_DATA_DIR=/opt/opencode/share
+    OPENCODE_INSTALL_DIR=/opt/opencode/bin
 
 %files
     share/AGENTS.md {{ OPENCODE_DATA_DIR }}/
     share/opencode.json {{ OPENCODE_DATA_DIR }}/
 
 %post
-    # Upgrade system packages.
     export DEBIAN_FRONTEND=noninteractive
-    apt-get update && apt-get upgrade -y
+    export OPENCODE_INSTALL_DIR={{ OPENCODE_INSTALL_DIR }}
 
-    # Install Node.js and OpenCode.
-    apt-get install npm -y
-    npm install -g opencode-ai
+    # Upgrade system packages and install curl for fetching install script
+    apt-get update && apt-get upgrade -y && apt-get install -y curl
+
+    # Install OpenCode
+    #
+    # Although the README at https://github.com/anomalyco/opencode
+    # claims that the install script respects the `OPENCODE_INSTALL_DIR`
+    # variable, this is not implemented, so we need to do it ourselves.
+    #
+    curl -fsSL https://opencode.ai/install | \
+        sed 's/INSTALL_DIR=.*/INSTALL_DIR=$OPENCODE_INSTALL_DIR/' | \
+        bash
 
 %environment
     export OPENCODE_CONFIG={{ OPENCODE_DATA_DIR }}/opencode.json
+    export PATH={{ OPENCODE_INSTALL_DIR }}:$PATH
 
 %test
     opencode --version
