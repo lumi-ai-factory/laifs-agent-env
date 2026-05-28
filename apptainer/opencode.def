@@ -2,12 +2,12 @@ Bootstrap: docker
 From: ubuntu:24.04
 
 %arguments
-    OPENCODE_DATA_DIR=/opt/opencode/share
+    OPENCODE_CONFIG_DIR=/opt/opencode/config
     OPENCODE_INSTALL_DIR=/opt/opencode/bin
 
 %files
-    share/AGENTS.md {{ OPENCODE_DATA_DIR }}/
-    share/opencode.json {{ OPENCODE_DATA_DIR }}/
+    config/opencode/ {{ OPENCODE_CONFIG_DIR }}
+    config/AGENTS.md {{ OPENCODE_CONFIG_DIR }}/
 
 %post
     export DEBIAN_FRONTEND=noninteractive
@@ -27,9 +27,11 @@ From: ubuntu:24.04
         bash
 
 %environment
-    export OPENCODE_CONFIG={{ OPENCODE_DATA_DIR }}/opencode.json
-    export OPENCODE_DISABLE_AUTOUPDATE=1
     export PATH={{ OPENCODE_INSTALL_DIR }}:$PATH
+
+    export OPENCODE_CONFIG={{ OPENCODE_CONFIG_DIR }}/opencode.json
+
+    export OPENCODE_DISABLE_AUTOUPDATE=1
 
 %test
     HOME="$(mktemp -d)" opencode debug info

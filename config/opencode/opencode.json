@@ -1,6 +1,6 @@
 {
     "$schema": "https://opencode.ai/config.json",
-    "instructions": ["/opt/opencode/share/AGENTS.md"],
+    "instructions": ["/opt/opencode/config/AGENTS.md"],
     "mcp": {
         "lumi-aif": {
             "type": "remote",
