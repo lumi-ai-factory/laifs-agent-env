@@ -30,6 +30,7 @@ From: ubuntu:24.04
     export PATH={{ OPENCODE_INSTALL_DIR }}:$PATH
 
     export OPENCODE_CONFIG={{ OPENCODE_CONFIG_DIR }}/opencode.json
+    export OPENCODE_TUI_CONFIG={{ OPENCODE_CONFIG_DIR }}/tui.json
 
     export OPENCODE_DISABLE_AUTOUPDATE=1
 
