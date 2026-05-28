@@ -28,6 +28,7 @@ From: ubuntu:24.04
 
 %environment
     export OPENCODE_CONFIG={{ OPENCODE_DATA_DIR }}/opencode.json
+    export OPENCODE_DISABLE_AUTOUPDATE=1
     export PATH={{ OPENCODE_INSTALL_DIR }}:$PATH
 
 %test
