@@ -1,9 +1,12 @@
 Bootstrap: docker
 From: ubuntu:24.04
 
+%arguments
+    OPENCODE_DATA_DIR=/opt/opencode/share
+
 %files
-    config/AGENTS.md /opt/opencode/
-    config/opencode.json /opt/opencode/
+    share/AGENTS.md {{ OPENCODE_DATA_DIR }}/
+    share/opencode.json {{ OPENCODE_DATA_DIR }}/
 
 %post
     # Upgrade system packages.
@@ -14,11 +17,8 @@ From: ubuntu:24.04
     apt-get install npm -y
     npm install -g opencode-ai
 
-    # Give read permissions to instructions and config
-    chmod +r /opt/opencode/*
-
 %environment
-    export OPENCODE_CONFIG=/opt/opencode/opencode.json
+    export OPENCODE_CONFIG={{ OPENCODE_DATA_DIR }}/opencode.json
 
 %test
     opencode --version
