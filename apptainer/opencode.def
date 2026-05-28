@@ -32,7 +32,7 @@ From: ubuntu:24.04
     export PATH={{ OPENCODE_INSTALL_DIR }}:$PATH
 
 %test
-    HOME=$(mktemp -d) opencode debug info
+    HOME="$(mktemp -d)" opencode debug info
 
 %runscript
-    opencode $@
+    opencode "$@"
