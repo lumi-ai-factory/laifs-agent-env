@@ -37,7 +37,8 @@ tasks, e.g.
 - light pre- and postprocessing (a few cores / a few GB of memory)
 
 All compute-heavy tasks must be submitted through the Slurm workload manager so that they are run
-on compute nodes.
+on compute nodes. Note that you do not have access to Slurm, so the user must submit any jobs
+themselves.
 
 ## Data storage
 
