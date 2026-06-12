@@ -7,6 +7,7 @@ From: ubuntu:24.04
 %arguments
     OPENCODE_CONFIG_DIR=/opt/opencode/config
     OPENCODE_INSTALL_DIR=/opt/opencode/bin
+    OPENCODE_VERSION=1.17.4
 
 %files
     config/opencode/ {{ OPENCODE_CONFIG_DIR }}
@@ -27,7 +28,7 @@ From: ubuntu:24.04
     #
     curl -fsSL https://opencode.ai/install | \
         sed 's/INSTALL_DIR=.*/INSTALL_DIR=$OPENCODE_INSTALL_DIR/' | \
-        bash
+        VERSION={{ OPENCODE_VERSION }} bash
 
 %environment
     export PATH={{ OPENCODE_INSTALL_DIR }}:$PATH
