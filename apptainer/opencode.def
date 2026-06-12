@@ -39,7 +39,8 @@ From: ubuntu:24.04
     export OPENCODE_DISABLE_AUTOUPDATE=1
 
 %test
-    HOME="$(mktemp -d)" opencode debug info
+    export HOME="$(mktemp -d)"
+    opencode debug info
 
 %runscript
     opencode "$@"
