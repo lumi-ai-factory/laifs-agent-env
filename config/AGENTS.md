@@ -51,7 +51,8 @@ workflows should be adjusted to the performance characteristics of the Lustre fi
 particular, having a large number of small files may put stress on the Lustre metadata servers and
 may limit file system performance due to limited striping.
 
-Users can check the memory and file usage quotas of their projects with the `lumi-workspaces` command.
+Users can check the memory and file usage quotas of their projects with the `lumi-workspaces` command,
+but note that you do not have access to this command.
 
 ## LUMI AI Factory MCP server
 
