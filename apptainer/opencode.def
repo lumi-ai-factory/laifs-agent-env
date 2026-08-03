@@ -7,7 +7,7 @@ From: ubuntu:24.04
 %arguments
     OPENCODE_CONFIG_DIR=/opt/opencode/config
     OPENCODE_INSTALL_DIR=/opt/opencode/bin
-    OPENCODE_VERSION=1.17.4
+    OPENCODE_VERSION=1.18.11
 
 %files
     config/opencode/ {{ OPENCODE_CONFIG_DIR }}
