@@ -10,11 +10,11 @@ From: opensuse/leap:16.0
     OPENCODE_VERSION=1.18.32
 
 %files
-    config/opencode/ {{ OPENCODE_CONFIG_DIR }}
-    config/AGENTS.md {{ OPENCODE_CONFIG_DIR }}/
+    config/opencode/ "{{ OPENCODE_CONFIG_DIR }}"
+    config/AGENTS.md "{{ OPENCODE_CONFIG_DIR }}/"
 
 %post
-    export OPENCODE_INSTALL_DIR={{ OPENCODE_INSTALL_DIR }}
+    export OPENCODE_INSTALL_DIR="{{ OPENCODE_INSTALL_DIR }}"
 
     update-ca-certificates && \
         zypper ref -s && \
@@ -29,13 +29,13 @@ From: opensuse/leap:16.0
     # variable, this is not implemented, so we need to do it ourselves.
     #
     curl -fsSL https://opencode.ai/install | \
-        sed 's/INSTALL_DIR=.*/INSTALL_DIR=$OPENCODE_INSTALL_DIR/' | \
-        VERSION={{ OPENCODE_VERSION }} bash
+        sed 's/INSTALL_DIR=.*/INSTALL_DIR="$OPENCODE_INSTALL_DIR"/' | \
+        VERSION="{{ OPENCODE_VERSION }}" bash
 
 %environment
-    export OPENCODE_CONFIG={{ OPENCODE_CONFIG_DIR }}/opencode.json
-    export OPENCODE_TUI_CONFIG={{ OPENCODE_CONFIG_DIR }}/tui.json
-    export PATH={{ OPENCODE_INSTALL_DIR }}:$PATH
+    export OPENCODE_CONFIG="{{ OPENCODE_CONFIG_DIR }}/opencode.json"
+    export OPENCODE_TUI_CONFIG="{{ OPENCODE_CONFIG_DIR }}/tui.json"
+    export PATH="{{ OPENCODE_INSTALL_DIR }}:$PATH"
 
 %test
     export HOME="$(mktemp -d)"
