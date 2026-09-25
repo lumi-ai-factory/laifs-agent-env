@@ -1,5 +1,5 @@
 Bootstrap: docker
-From: ubuntu:24.04
+From: opensuse/leap:16.0
 
 %labels
     Author mitjasai@csc.fi
@@ -14,11 +14,13 @@ From: ubuntu:24.04
     config/AGENTS.md {{ OPENCODE_CONFIG_DIR }}/
 
 %post
-    export DEBIAN_FRONTEND=noninteractive
     export OPENCODE_INSTALL_DIR={{ OPENCODE_INSTALL_DIR }}
 
-    # Upgrade system packages and install curl for fetching install script
-    apt-get update && apt-get upgrade -y && apt-get install -y curl
+    update-ca-certificates && \
+        zypper ref -s && \
+        zypper -n in -t pattern --recommends devel_basis && \
+        zypper -n in nano rsync screen strace time vim wget && \
+        zypper -n clean
 
     # Install OpenCode
     #
