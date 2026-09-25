@@ -30,7 +30,7 @@ From: opensuse/leap:16.0
     #
     curl -fsSL https://opencode.ai/install | \
         sed 's/INSTALL_DIR=.*/INSTALL_DIR="$OPENCODE_INSTALL_DIR"/' | \
-        VERSION="{{ OPENCODE_VERSION }}" bash
+        bash -s -- --version "{{ OPENCODE_VERSION }}"
 
 %environment
     export OPENCODE_CONFIG_DIR="{{ OPENCODE_CONFIG_DIR }}"
