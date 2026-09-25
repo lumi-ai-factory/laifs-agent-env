@@ -33,8 +33,7 @@ From: opensuse/leap:16.0
         VERSION="{{ OPENCODE_VERSION }}" bash
 
 %environment
-    export OPENCODE_CONFIG="{{ OPENCODE_CONFIG_DIR }}/opencode.json"
-    export OPENCODE_TUI_CONFIG="{{ OPENCODE_CONFIG_DIR }}/tui.json"
+    export OPENCODE_CONFIG_DIR="{{ OPENCODE_CONFIG_DIR }}"
     export PATH="{{ OPENCODE_INSTALL_DIR }}:$PATH"
 
 %test
