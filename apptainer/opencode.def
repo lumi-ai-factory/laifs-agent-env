@@ -32,6 +32,12 @@ From: opensuse/leap:16.0
         sed 's/INSTALL_DIR=.*/INSTALL_DIR="$OPENCODE_INSTALL_DIR"/' | \
         bash -s -- --version "{{ OPENCODE_VERSION }}"
 
+    # Add empty gitignore file to OPENCODE_CONFIG_DIR to prevent crash during test
+    #
+    # See: https://github.com/anomalyco/opencode/issues/23040
+    #
+    touch "{{ OPENCODE_CONFIG_DIR }}/.gitignore"
+
 %environment
     export OPENCODE_CONFIG_DIR="{{ OPENCODE_CONFIG_DIR }}"
     export PATH="{{ OPENCODE_INSTALL_DIR }}:$PATH"
