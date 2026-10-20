@@ -13,6 +13,7 @@
         "*": "ask",
         "lumi-aif_*": "allow"
     },
+    "model": "aitta/Qwen/Qwen3.8-27B",
     "provider": {
         "aitta": {
             "npm": "@ai-sdk/openai-compatible",
