@@ -21,7 +21,7 @@ More information:
 -- Set module-level Singularity bind paths
 --
 
-setenv("SINGULARITY_BIND", "/appl")
+setenv("SINGULARITY_BIND", "/appl,/pfs/lustref1/appl")
 
 --
 -- Add executables to `PATH`
